@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/main.css">
+</head>
+
+<body onload="onInit()">
+    <h1>Welcome to the BookShop!</h1>
+    <header>
+    <form onsubmit="onAddBook(event)">
+        <div>Add a new Book</div>
+        <input type="text" name="book-name" placeholder="What is the new Book name?" oninput="onHandleInput()" />
+        <input type="text" name="book-price" placeholder="How much should it cost?" oninput="onHandleInput()" />
+        <button class="add-book-btn" disabled>Add a new book</button>
+    </form>
+    <section class="book-sort">
+        <h2>Sort By</h2>
+        <button onclick="onSortBy('PRICE')">Lowest Price First</button>
+        <button onclick="onSortBy('ABC')">Abc</button>
+        <button onclick="onSortBy('CLEAR')" > Reset</button>
+    </section>
+    <section class="book-filter">
+        <h2>Filter</h2>
+        <input type="number" class="min-rating-input" min="0" max="10" placeholder="By minimum rating" oninput="onSetFilterBy({minRate: this.value})">
+        <input type="number" class="max-price-input" min="0" placeholder="By maximum price"oninput="onSetFilterBy({maxPrice: this.value})">
+    </section>
+    <section>
+        <h2>Search Engine</h2>
+        <form onsubmit="onSearchBook(event)">
+            <input type="text" name="search-res" placeholder="Search Name">
+            <button>Search</button>
+        </form>
+        <button class="Clean-search-btn" onclick="cleanSearch()">Clean Search</button>
+    </section>
+</header>
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody class="bookshop-display">
+        </tbody>
+    </table>
+    <nav class="page-navigator">
+        <button class="prev-page-btn" onclick="onPrevPage(this)" disabled>Previous Page</button>
+        <div class="page-navigator-btns"></div>
+        <button class="next-page-btn" onclick="onNextPage(this)">Next Page</button>
+    </nav>
+    <div class="read-book-modal hide">
+        <button class="close-modal" onclick="closeReadModal()">X</button>
+        <img src="">
+        <div class="book-description"></div>
+        <div class="rating-button-container"></div>
+    </div>
+
+
+
+
+
+
+
+    <script src="/js/service/utils.service.js"></script>
+    <script src="/js/service/storage.service.js"></script>
+    <script src="/js/service/book-shop.service.js"></script>
+    <script src="/js/main.controller.js"></script>
+</body>
+
+</html>

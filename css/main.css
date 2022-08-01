@@ -1,0 +1,85 @@
+body {
+    background-color: darkslateblue;
+    color: whitesmoke;
+    overflow-x: hidden;
+    padding: 0 40px;
+    text-align: center;
+}
+
+table {
+    background-color: rgba(58, 97, 226, 0.877);
+    text-align: center;
+    margin: auto;
+    height: 340px;
+    width: 600px;
+}
+
+header,
+header>section,
+header>form {
+    display: flex;
+}
+
+header {
+    flex-direction: column;
+    gap: 10px;
+    margin-left: 300px;
+}
+
+header>section {
+    height: 40px;
+    align-items: center;
+    gap: 5px;
+}
+td {
+    border: 1px solid black;
+    background-color: rgb(157, 157, 221);
+    font-size: x-large;
+    margin: 5px;
+}
+
+
+.remove-btn,
+.update-btn,
+.read-btn {
+    background-color: rgb(41, 44, 189);
+    border-radius: 7%;
+    border: none;
+    font-size: large;
+}
+
+.read-book-modal {
+    position: absolute;
+    border: rgb(107, 107, 107) solid 2px;
+    background-color: antiquewhite;
+    color: black;
+    width: 400px;
+    padding: 4px;
+    top: 0px;
+    transition: 1s;
+    right: 0%;
+
+}
+
+.min-rating-input {
+    width: 135px;
+}
+
+[name=book-rating-input] {
+    width: 10%;
+}
+
+.read-book-modal>img {
+    float: right;
+}
+
+.read-book-modal.hide {
+    right: -50%;
+
+}
+
+.page-navigator {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
