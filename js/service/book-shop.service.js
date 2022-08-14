@@ -1,6 +1,106 @@
 'use strict'
 const STORAGE_KEY = 'booksDB'
 const PAGE_SIZE = 5
+const gTrans = {
+    header: {
+        en: 'Welcome to the Book shop',
+        he: 'ברוך הבא לחנות הספרים'
+    },
+    'add-new-book': {
+        en: 'Add new book',
+        he: 'הוסף ספר חדש'
+    },
+    'new-book-name': {
+        en: 'What is the new Book name?',
+        he: 'מה שם הספר החדש?'
+    },
+    'new-book-price': {
+        en: 'How much should it cost?',
+        he: 'כמה הוא צריך לעלות?'
+    },
+    'add-book': {
+        en: 'Add',
+        he: 'הוסף'
+    },
+    sort: {
+        en: 'Sort',
+        he: 'מיין'
+    },
+    'sort-by-price': {
+        en: 'Lowest Price First',
+        he: 'מהמחיר הנמוך ביותר'
+    },
+    'sort-by-txt': {
+        en: 'text',
+        he: 'על פי הטקסט'
+    },
+    clear: {
+        en: 'clear',
+        he: 'נקה'
+    },
+    filter: {
+        en: 'Filter',
+        he: 'סנן'
+    },
+    'filter-price': {
+        en: 'By maximum price',
+        he: 'על פי מחיר מקסימאלי'
+    },
+    'search-engine': {
+        en: 'Search Engine',
+        he: 'חפש על פי שם'
+    },
+    'search-btn': {
+        en: 'Search',
+        he: 'חפש'
+    },
+    id: {
+        en: 'Id',
+        he: 'איידי'
+    },
+    name: {
+        en: 'Name',
+        he: 'שם הספר'
+    },
+    price: {
+        en: 'Price',
+        he: 'מחיר'
+    },
+    actions: {
+        en: 'Actions',
+        he: 'פעולות'
+    },
+    'prev-btn': {
+        en: 'Previous',
+        he: 'הקודם'
+    },
+    'next-btn': {
+        en: 'Next',
+        he: 'הבא'
+    },
+    read: {
+        en: 'Read',
+        he: 'קרא'
+    },
+    update: {
+        en: 'update',
+        he: 'עדכן'
+    },
+    remove: {
+        en: 'remove',
+        he: 'הסר'
+    },
+    'book-rating': {
+        en: 'Book Rating:',
+        he: 'דירוג הספר:'
+    },
+    rate: {
+        en: 'Rate',
+        he: 'דרג'
+    }
+
+}
+var currLang = 'en'
 
 
 var gBooks
@@ -9,7 +109,6 @@ var gSearchBy
 var gPageIdx = 0
 var gSortBy = null
 var gCurrBook
-
 
 
 
@@ -111,7 +210,7 @@ function changePageIndex(Index) {
     console.log(gPageIdx)
     return {
         prev: (gPageIdx === 0),
-        next: (gPageIdx > gBooks.length / PAGE_SIZE -1)
+        next: (gPageIdx > gBooks.length / PAGE_SIZE - 1)
     }
 }
 
@@ -126,6 +225,15 @@ function prevPage() {
     if (gPageIdx > 0) gPageIdx--
     return (gPageIdx === 0)
 
+}
+
+function setCurrLang(lang){
+    currLang = lang
+    return currLang
+}
+
+function getTrans(){
+    return gTrans
 }
 
 function getBooksForDisplay() {

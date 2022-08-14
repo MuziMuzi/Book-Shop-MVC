@@ -6,67 +6,89 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="/css/main.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css">
+
 </head>
 
 <body onload="onInit()">
-    <h1>Welcome to the BookShop!</h1>
-    <header>
-    <form onsubmit="onAddBook(event)">
-        <div>Add a new Book</div>
-        <input type="text" name="book-name" placeholder="What is the new Book name?" oninput="onHandleInput()" />
-        <input type="text" name="book-price" placeholder="How much should it cost?" oninput="onHandleInput()" />
-        <button class="add-book-btn" disabled>Add a new book</button>
-    </form>
-    <section class="book-sort">
-        <h2>Sort By</h2>
-        <button onclick="onSortBy('PRICE')">Lowest Price First</button>
-        <button onclick="onSortBy('ABC')">Abc</button>
-        <button onclick="onSortBy('CLEAR')" > Reset</button>
-    </section>
-    <section class="book-filter">
-        <h2>Filter</h2>
-        <input type="number" class="min-rating-input" min="0" max="10" placeholder="By minimum rating" oninput="onSetFilterBy({minRate: this.value})">
-        <input type="number" class="max-price-input" min="0" placeholder="By maximum price"oninput="onSetFilterBy({maxPrice: this.value})">
-    </section>
-    <section>
-        <h2>Search Engine</h2>
-        <form onsubmit="onSearchBook(event)">
-            <input type="text" name="search-res" placeholder="Search Name">
-            <button>Search</button>
-        </form>
-        <button class="Clean-search-btn" onclick="cleanSearch()">Clean Search</button>
-    </section>
-</header>
-    <table>
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Price</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody class="bookshop-display">
-        </tbody>
-    </table>
-    <nav class="page-navigator">
-        <button class="prev-page-btn" onclick="onPrevPage(this)" disabled>Previous Page</button>
-        <div class="page-navigator-btns"></div>
-        <button class="next-page-btn" onclick="onNextPage(this)">Next Page</button>
-    </nav>
-    <div class="read-book-modal hide">
-        <button class="close-modal" onclick="closeReadModal()">X</button>
-        <img src="">
-        <div class="book-description"></div>
-        <div class="rating-button-container"></div>
+    <div class="lang-selector">
+        <select onchange="setLang()">
+            <option value="en">English</option>
+            <option value="he">עברית</option>
+        </select>
     </div>
-
-
-
-
-
-
+    <div class="operations-container">
+        <h2 data-trans="header">Welcome to the BookShop!</h2>
+        <button onclick="renderOperationModal(this.dataset.trans)" data-trans="add-new-book"></button>
+        <button onclick="renderOperationModal(this.dataset.trans)" data-trans="sort"></button>
+        <button onclick="renderOperationModal(this.dataset.trans)" data-trans="filter"></button>
+        <button onclick="renderOperationModal(this.dataset.trans)" data-trans="search-engine"></button>
+    </div>
+    <section class="oper-modal-container">
+        <div class="operation-modal">
+        </div>
+    </section>
+    
+        <!-- <header>
+            <form onsubmit="onAddBook(event)">
+                <div data-trans="add-new-book"></div>
+                <input data-trans="new-book-name" type="text" name="book-name" placeholder="What is the new Book name?"
+                    oninput="onHandleInput()" />
+                <input data-trans="new-book-price" type="text" name="book-price" placeholder="How much should it cost?"
+                    oninput="onHandleInput()" />
+                <button data-trans="add-book" class="add-book-btn" disabled>Add</button>
+            </form>
+            <section class="book-sort">
+                <h2 data-trans="sort">Sort</h2>
+                <button data-trans="sort-by-price" onclick="onSortBy('PRICE')">Lowest Price First</button>
+                <button data-trans="sort-by-txt" onclick="onSortBy('ABC')">Abc</button>
+                <button data-trans="clear" onclick="onSortBy('CLEAR')"> Reset</button>
+            </section>
+            <section class="book-filter">
+                <h2 data-trans="filter">Filter</h2>
+                <input type="number" class="min-rating-input" min="0" max="10" placeholder="By minimum rating"
+                    oninput="onSetFilterBy({minRate: this.value})">
+                <input type="number" class="max-price-input" min="0" placeholder="By maximum price"
+                    oninput="onSetFilterBy({maxPrice: this.value})">
+            </section>
+            <section>
+                <h2 data-trans="search-engine">Search Engine</h2>
+                <form onsubmit="onSearchBook(event)">
+                    <input type="text" name="search-res">
+                    <button data-trans="search-btn">Search</button>
+                </form>
+                <button data-trans="clear" class="Clean-search-btn" onclick="cleanSearch()">Clean Search</button>
+            </section>
+        </header> -->
+        <table>
+            <thead>
+                <tr>
+                    <th data-trans="id">Id</th>
+                    <th data-trans="name">Name</th>
+                    <th data-trans="price">Price</th>
+                    <th data-trans="actions">Actions</th>
+                </tr>
+            </thead>
+            <tbody class="bookshop-display">
+            </tbody>
+        </table>
+        <nav class="page-navigator">
+            <button data-trans="prev-btn" class="prev-page-btn" onclick="onPrevPage(this)" disabled>Previous
+                Page</button>
+            <div class="page-navigator-btns"></div>
+            <button data-trans="next-btn" class="next-page-btn" onclick="onNextPage(this)">Next Page</button>
+        </nav>
+        <div class="black-screen" onclick="closeReadModal()"></div>
+        <div class="read-book-modal hide">
+            <button class="close-modal" onclick="closeReadModal()">X</button>
+            <img src="">
+            <div class="book-description"></div>
+            <div class="rating-button-container"></div>
+        </div>
+    </div>
 
     <script src="js/service/utils.service.js"></script>
     <script src="js/service/storage.service.js"></script>
